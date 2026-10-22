@@ -1,5 +1,5 @@
 
-const STATUSES = [
+export const STATUSES = [
     "AVAILABLE",
     "CHARGING",
     "FAULT",
@@ -7,7 +7,7 @@ const STATUSES = [
     "MAINTENANCE",
 ];
 
-const stations = [];
+export const stations = [];
 
 for (let i = 0; i <= 10; i++) {
     stations.push({
@@ -19,10 +19,5 @@ for (let i = 0; i <= 10; i++) {
     });
 }
 
-const incidents = [];
+export const incidents = [];
 
-module.exports = {
-    STATUSES,
-    stations,
-    incidents,
-};

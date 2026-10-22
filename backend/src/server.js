@@ -1,8 +1,17 @@
 import  express from "express"
+import stationRoutes from "./routes/stationRoute.js";
+import incidentsRoutes  from "./routes/incidentRoutes.js"
+import { incidents } from "./data/store.js";
 const app=express();
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+
+
+app.use("/api/stations",stationRoutes);
+app.use("/api/incidents",incidentsRoutes);
+app.get("/",(req,res)=>{
+    res.send('hello');
+    
+})
+
 
 app.listen(5000,()=>{
     console.log(`http://localhost:5000`)
