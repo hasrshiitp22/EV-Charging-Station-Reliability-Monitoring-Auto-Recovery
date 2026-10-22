@@ -1,8 +1,7 @@
 import expess from "express"
+import { createIncident } from "../services/incidentServices.js";
 import { stations,incidents} from "../data/store.js";
 const router =expess.Router()
-
-
 
 router.get("/",(req,res)=>{
   res.json(stations);
@@ -50,16 +49,8 @@ router.post("/:id/fault",(req,res)=>{
   station.faultAt= Date.now(),
   station.resetAttempts= 0;
   
-  incidents.push({
-    id:incidents.length+1,
-    stationId:station.id,
-    faultAt:new Date( station.faultAt).toISOString(),
-    recoveredAt: null,
-    recoverySeconds:null,
-    resetAttempts: 0,
-    result: "PENDING",
-    
-  }),
+
+createIncident(station);
   
   res.json({
     message: "Station fault simulated successfully",

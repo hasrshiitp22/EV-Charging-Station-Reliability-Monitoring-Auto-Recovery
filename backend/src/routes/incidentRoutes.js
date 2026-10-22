@@ -1,9 +1,7 @@
-
 import express from "express"
 const router = express.Router();
-
 import  { stations, incidents, STATUSES } from "../data/store.js"
-
+import db from "../database/db.js";
 // GET /api/incidents
 router.get("/", (req, res) => {
   res.json([...incidents].reverse());
