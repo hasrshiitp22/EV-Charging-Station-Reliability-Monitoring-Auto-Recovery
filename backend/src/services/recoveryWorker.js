@@ -39,7 +39,7 @@ function recoveryFaultyStation() {
       );
         }
          else if (station.resetAttempts >= 3) {
-      // Three attempts failed: technician intervention is needed.
+      
       incident.result = "NEEDS_TECHNICIAN";
 
       station.status = "MAINTENANCE";
