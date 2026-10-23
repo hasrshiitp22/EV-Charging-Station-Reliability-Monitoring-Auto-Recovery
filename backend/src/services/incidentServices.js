@@ -2,7 +2,6 @@
 import { incidents } from "../data/store.js";
 import db from "../database/db.js";
 
-// SQL command to insert a new incident.
 const insertIncident = db.prepare(`
     INSERT INTO incidents (
         stationId,

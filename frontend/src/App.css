@@ -253,7 +253,7 @@ p {
 }
 
 .status-badge.charging {
-  background: #dbeafe;
+ background-color:yellow;
   color: #1d4ed8;
 }
 
@@ -449,5 +449,43 @@ footer {
 
   .recovery-value strong {
     font-size: 34px;
+  }
+}
+
+.reliability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #f8fafc;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+}
+
+.metric-tile span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.metric-tile strong {
+  font-size: 27px;
+  color: #172033;
+}
+
+@media (max-width: 750px) {
+  .reliability-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .reliability-grid {
+    grid-template-columns: 1fr;
   }
 }

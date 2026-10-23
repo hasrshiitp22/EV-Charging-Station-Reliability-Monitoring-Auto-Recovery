@@ -87,6 +87,23 @@ function App() {
     stats?.recoveredIncidents ??
     incidents.filter((item) => item.result === "RECOVERED").length;
 
+const completedIncidents = incidents.filter(
+  (incident) =>
+    incident.result === "RECOVERED" ||
+    incident.result === "NEEDS_TECHNICIAN"
+).length;
+
+const successRate =
+  completedIncidents === 0
+    ? null
+    : (recoveredCount / completedIncidents) * 100;
+
+const chargingCount = statusCounts.CHARGING ?? 0;
+const maintenanceCount = statusCounts.MAINTENANCE ?? 0;
+const pendingCount =
+  stats?.pendingIncidents ??
+  incidents.filter((incident) => incident.result === "PENDING").length;
+
   const cards = [
     {
       label: "Total Stations",
@@ -198,28 +215,40 @@ function App() {
               </div>
             )}
           </section>
-                    <section className="panel reliability-panel">
-            <div className="reliability-icon">
-              <Clock size={28} />
-            </div>
+          
+<section className="panel">
+  <div className="section-heading">
+    <div>
+      <h2>Reliability Overview</h2>
+      <p>Station health and recovery performance</p>
+    </div>
+  </div>
 
-            <div className="reliability-content">
-              <p className="eyebrow">SYSTEM PERFORMANCE</p>
-              <h2>Reliability Metrics</h2>
-              <p>Average recovery time across recovered incidents</p>
+  <div className="reliability-grid">
+    <div className="metric-tile">
+      <span>Charging</span>
+      <strong>{chargingCount}</strong>
+    </div>
 
-              <div className="recovery-value">
-                <strong>
-                  {stats?.averageRecoverySeconds == null
-                    ? "—"
-                    : Number(stats.averageRecoverySeconds).toFixed(2)}
-                </strong>
-                <span>seconds</span>
-              </div>
+    <div className="metric-tile">
+      <span>Maintenance</span>
+      <strong>{maintenanceCount}</strong>
+    </div>
 
-              <small>Calculated from successfully recovered incidents</small>
-            </div>
-          </section>
+    <div className="metric-tile">
+      <span>Pending Incidents</span>
+      <strong>{pendingCount}</strong>
+    </div>
+
+    <div className="metric-tile">
+      <span>Recovery Success Rate</span>
+      <strong>
+        {successRate === null ? "—" : `${successRate.toFixed(1)}%`}
+      </strong>
+    </div>
+  </div>
+</section>
+
 
           <section className="panel">
             <div className="section-heading">
@@ -283,7 +312,28 @@ function App() {
           </section>
 
 
+          <section className="panel reliability-panel">
+            <div className="reliability-icon">
+              <Clock size={28} />
+            </div>
 
+            <div className="reliability-content">
+              <p className="eyebrow">SYSTEM PERFORMANCE</p>
+              <h2>Reliability Metrics</h2>
+              <p>Average recovery time across recovered incidents</p>
+
+              <div className="recovery-value">
+                <strong>
+                  {stats?.averageRecoverySeconds == null
+                    ? "—"
+                    : Number(stats.averageRecoverySeconds).toFixed(2)}
+                </strong>
+                <span>seconds</span>
+              </div>
+
+              <small>Calculated from successfully recovered incidents</small>
+            </div>
+          </section>
 
         </>
       )}

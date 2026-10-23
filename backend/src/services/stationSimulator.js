@@ -16,7 +16,7 @@ function simulateStations() {
             createIncident(station);
             console.log(`${station.id} developed a fault`);
         }
-        else if (station.status == "AVAILABLE" && random < 0.02) {
+        else if (station.status == "AVAILABLE" && random < 0.04) {
             station.status = "CHARGING";
             console.log(`${station.id} is now CHARGING`);
         } else if (station.status=="CHARGING" && random<0.03) {
